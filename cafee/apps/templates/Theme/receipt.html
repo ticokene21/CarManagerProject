@@ -1,0 +1,110 @@
+ 
+<section id="main-content">
+          <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i>Receipt</h3>
+            
+            <!-- BASIC FORM ELELEMNTS -->
+            <div class="row mt">
+              <div class="col-lg-12">
+                  <div class="form-panel">
+                      <h4 class="mb"><i class="fa fa-angle-right"></i>Receipt Order</h4>
+                      <form class="form-horizontal style-form" method="get">
+                          <div style="color: red" >{$ message.receipt $} </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Date:</label>
+                              <div class="col-sm-7">
+                                  <input type="date" class="form-control" ng-model="CRReceipt.receiptDate">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Customer</label>
+                              <div class="col-sm-7">
+                                  <select class="form-control" ng-options="item.customerName for item in receipt_cus_list" ng-model="receipt_cus_current" name="receipt_cus_current" ng-change="ReceiptCusChange()"></select>
+                              </div>
+                          </div>
+                          <div ng-if="receipt_cus_current != null">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">Name: </label>
+                                <div class="col-sm-7">
+                                    <p>{$ receipt_cus_current.customerName $}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 color-sm-2 control-label">Phone: </label>
+                                <div class="col-sm-7">
+                                    <p>{$ receipt_cus_current.customerPhone $}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">Email: </label>
+                                <div class="col-sm-7">
+                                    <p>{$ receipt_cus_current.customerEmail $}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">Adress: </label>
+                                <div class="col-sm-7">
+                                    <p>{$ receipt_cus_current.customerAdress $}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">Debt: </label>
+                                <div class="col-sm-7">
+                                    <p>{$ receipt_cus_current.customerDebt $}</p>
+                                </div>
+                            </div>
+                          </div>
+                          <div ng-if="receipt_cus_current == null"></div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Payment:</label>
+                              <div class="col-sm-7">
+                                  <input type="number" class="form-control" ng-model="CRReceipt.receiptMoney" ng-keyup="TestDebt(CRReceipt.receiptMoney)">
+                                  <span style="color: red" >{$ message.debt $}</span>
+                              </div>
+                          </div>
+
+                      </form>
+
+                  </div>
+                  <div class=" add-task-row">
+                          <button type="button" class="btn btn-info btn-sm pull-left" ng-click="CreateReceipt()">Save </button>
+                          <button type="button" class="btn btn-default btn-sm pull-left" href="">Clear All</button>
+                  </div>
+              </div><!-- col-lg-12-->       
+            </div><!-- /row -->          
+    </section><! --/wrapper -->
+  </section><!-- /MAIN CONTENT -->
+<div class="modal fade" id="AddBillDet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Product</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mt">
+              <div class="col-lg-12">
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Product Name:</label>
+                              <div class="col-sm-7">
+                                  <select class="form-control" ng-options="bill_det_pro.productName for bill_det_pro in bill_det_pro_list" ng-model="bill_det_pro_current" name="bill_det_pro_current" ng-change="BillDetProChange()"></select>
+                              </div>  
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Quantity:</label>
+                              <div class="col-sm-7">
+                                  <input type="number" class="form-control" ng-model="CRBillDet.billDetQuantity">
+                              </div>
+                          </div>
+                      </form>
+              </div>
+          </div>                  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="AddBillDet($index)">Add</button>
+      </div>
+    </div>
+  </div>
+</div> 

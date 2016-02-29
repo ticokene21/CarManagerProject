@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SecondController">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>DASHGUM - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ STATIC_URL }}assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="{{ STATIC_URL }}assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        
+    <!-- Custom styles for this template -->
+    <link href="{{ STATIC_URL }}assets/css/style.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}assets/css/style-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-controller = "LoginController">
+<div class="modal fade" id="create_ac" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Account</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mt">
+              <div class="col-lg-12">
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Username:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRAccount.username" id="user" ng-keyup="TestUser()">
+                                  <div style="color: red"><p>({ message[0] })</p></div>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Password:</label>
+                              <div class="col-sm-7">
+                                  <input type="password" class="form-control" ng-model="CRAccount.password">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Password Confign:</label>
+                              <div class="col-sm-7">
+                                  <input type="password" class="form-control" ng-model="passcon" id="passcon" ng-keyup="TestPassCon()">
+                                  <div style="color: red"><p>({ message[1] })</p></div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Name:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRAccount.name">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Email:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRAccount.email">
+                              </div>
+                          </div>
+                      </form>
+                      <div style"color:red"><p>({mess})</p></div>
+              </div>
+          </div>                  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="CreateAccount()">Create</button>
+      </div>
+    </div>
+  </div>
+</div> 
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+
+	  <div id="login-page">
+	  	<div class="container">
+	  	
+		      <form class="form-login">
+		        <h2 class="form-login-heading">sign in now</h2>
+		        <div class="login-wrap">
+		            <input type="text" class="form-control" placeholder="User ID" ng-model="username" autofocus>
+		            <br>
+		            <input type="password" class="form-control" placeholder="Password" ng-model="password" autofocus >
+                <br>
+
+		            <label class="checkbox">
+		                <span class="pull-right">
+		                    <a data-toggle="modal" href="{{ STATIC_URL }}login.html#myModal"> Forgot Password?</a>
+		
+		                </span>
+		            </label>
+		            <button class="btn btn-theme btn-block" ng-click="LoginAccount()"><i class="fa fa-lock"></i> SIGN IN</button>
+		            <hr>
+		            
+		            <div class="registration">
+		                Don't have an account yet?<br/>
+		                <a data-toggle="modal" data-target="#create_ac" style="cursor: pointer" >
+		                    Create an account
+		                </a>
+		            </div>
+		
+		        </div>
+		
+		          <!-- Modal -->
+		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+		              <div class="modal-dialog">
+		                  <div class="modal-content">
+		                      <div class="modal-header">
+		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                          <h4 class="modal-title">Forgot Password ?</h4>
+		                      </div>
+		                      <div class="modal-body">
+		                          <p>Enter your e-mail address below to reset your password.</p>
+		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+		
+		                      </div>
+		                      <div class="modal-footer">
+		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+		                          <button class="btn btn-theme" type="button">Submit</button>
+		                      </div>
+		                  </div>
+		              </div>
+		          </div>
+		          <!-- modal -->
+		
+		      </form>	  	
+	  	
+	  	</div>
+	  </div>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="{{ STATIC_URL }}assets/js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}assets/js/bootstrap.min.js"></script>
+
+    <!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+    <script type="text/javascript" src="{{ STATIC_URL }}assets/js/jquery.backstretch.min.js"></script>
+    <script>
+        $.backstretch("{{ STATIC_URL }}assets/img/login-bg.jpg", {speed: 500});
+    </script>
+    <script type="text/javascript" src="{{ STATIC_URL }}angularJS/angular.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}angularJS/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}angularJS/angular-resource.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}angularJS/angular-route.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}angularJS/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}angularJS/ng-infinite-scroll.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}angularJS/login.js"></script>
+
+  </body>
+</html>

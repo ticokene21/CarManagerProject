@@ -1,0 +1,204 @@
+ 
+<section id="main-content">
+          <section class="wrapper">
+            <!-- BASIC FORM ELELEMNTS -->
+                <div class="row mt">
+                          <div class="col-md-12">
+                              <div class="content-panel">
+                                  <table class="table table-striped table-advance table-hover">
+                                    <h4><i class="fa fa-angle-right"></i> Sale order list</h4>
+                                    <input type="text" style = "width: 20%; margin-left: 20px;" class="form-control" autofocus placeholder="Search sale order" ng-model="searchSale">
+                                    <hr>
+                                      <thead>
+                                      <tr>
+                                          <th><i class="fa fa-bullhorn"></i> STT </th>
+                                          <th>ID</th>
+                                          <th class="hidden-phone"> Date</th>
+                                          <th> Customer </th>
+                                          <th>State</th>
+                                          <th> Sum </th>  
+                                      </tr>
+                                      
+                                      </thead>
+                                        <style type="text/css">.hidden:disabled { opacity: 0.5; cursor: not-allowed;  }</style>
+                                      <tbody>
+
+                                     <a style="cursor:pointer; ">
+                                      <tr ng-repeat="item in sale_order_list  | filter: searchSale">
+                                          
+                                          <td>{$ $index + 1$}</td>
+                                          <td class="hidden-phone">SO{$ item.billID $}</td>
+                                          <td>{$ item.billDate $}</td>
+                                          <td>{$ item.billCus.customerName $}</td>
+                                          <td>{$ item.billState.stateName $}</td>
+                                          <td>{$ item.billSum $}</td>
+                                          <td>
+                                              <button class="btn btn-success btn-xs"><i class="fa fa-eye" ng-click="change_stage(item)"></i></button>
+                                              <button class="btn btn-primary btn-xs" ng-class="{hidden: item.manufacturingState.stateID == 4 || item.manufacturingState.stateID == 3 }" ><i class="fa fa-pencil" data-toggle="modal" data-target="#UpdateManu" ng-click="GetManuID(item.manufacturingID)"></i></button>
+                                              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o" ng-click="cancel(item)"></i></button> 
+                                          </td>
+                                          
+                                      </tr>
+                                      </a>
+                                      </tbody>
+                                      
+                                  </table>
+                                   
+                              </div><!-- /content-panel -->
+                              <div class=" add-task-row">
+                                      <button type="button" class="btn btn-success btn-sm pull-left" ><a href="#/SaleOrder/" style="color:white">Create Salea order</a></button>
+                                    
+                              </div>
+                          </div><!-- /col-md-12 -->
+
+                    </div><!-- /row -->
+
+                <div class="row mt">
+                          <div class="col-md-12">
+                              <div class="content-panel">
+                                  <table class="table table-striped table-advance table-hover">
+                                    <h4><i class="fa fa-angle-right"></i> Purchase order list</h4><i><input type="text" placeholder="Search purchase order..." style = "width: 20%; margin-left: 20px;" class="form-control" autofocus ng-model="searchPur"></i>
+                                    
+                                    <hr>
+                                      <thead>
+                                      <tr>
+                                          <th><i class="fa fa-bullhorn"></i> STT </th>
+                                          <th>ID</th>
+                                          <th class="hidden-phone"> Date</th>
+                                          <th> Supplier </th>
+                                          <th> Sum </th>  
+                                      </tr>
+                                      
+                                      </thead>
+                                        <style type="text/css">.hidden:disabled { opacity: 0.5; cursor: not-allowed;  }</style>
+                                      <tbody>
+
+                                     <a style="cursor:pointer; ">
+                                      <tr ng-repeat="item in purchase_order_list | filter:searchPur">
+                                          
+                                          <td>{$ $index + 1$}</td>
+                                          <td class="hidden-phone">PC{$ item.purchaseID $}</td>
+                                          <td>{$ item.purchaseDate $}</td>
+                                          <td>{$ item.purchaseSupplier.supplierName $}</td>
+                                          <td>{$ item.purchaseSum $}</td>
+                                          <td>
+                                              <button class="btn btn-success btn-xs"><i class="fa fa-eye" \ ng-click="viewitem(item)"></i></button>
+                                              <button class="btn btn-primary btn-xs" ng-class="{hidden: item.manufacturingState.stateID == 4 || item.manufacturingState.stateID == 3 }" ><i class="fa fa-pencil" data-toggle="modal" data-target="#UpdateManu" ng-click="GetManuID(item.manufacturingID)"></i></button>
+                                              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o" ng-click="DeleteManu(item.manufacturingID)"></i></button> 
+                                          </td>
+                                          
+                                      </tr>
+                                      </a>
+                                      </tbody>
+                                      
+                                  </table>
+                                   
+                              </div><!-- /content-panel -->
+                              <div class=" add-task-row">
+                                      <button type="button" class="btn btn-success btn-sm pull-left" ><a href="#/CR_purchase/" style="color:white">Create Purchase order</a></button>
+                                    
+                              </div>
+                          </div><!-- /col-md-12 -->
+
+                    </div><!-- /row -->
+                    <div class="row mt">
+                          <div class="col-md-12">
+                              <div class="content-panel">
+                                  <table class="table table-striped table-advance table-hover">
+                                    <h4><i class="fa fa-angle-right"></i> Customer list</h4>
+                                    <i><input type="text"  ng-model="searchCus" style = "width: 20%; margin-left: 20px;" class="form-control" autofocus placeholder="Search customer..."></i>
+                                    <hr>
+                                      <thead>
+                                      <tr>
+                                          <th><i class="fa fa-bullhorn"></i> STT </th>
+                                          <th>ID</th>
+                                          <th> Name </th>
+                                          <th> Phone </th>
+                                          <th> Email </th>
+                                          <th> Adress </th>
+                                          <th> Debt </th>  
+                                      </tr>
+                                      
+                                      </thead>
+                                        <style type="text/css">.hidden:disabled { opacity: 0.5; cursor: not-allowed;  }</style>
+                                      <tbody>
+
+                                     <a style="cursor:pointer; ">
+                                      <tr ng-repeat="item in customerlist | filter:searchCus">
+                                          
+                                          <td>{$ $index + 1$}</td>
+                                          <td class="hidden-phone">CUS{$ item.customerID $}</td>
+                                          <td>{$ item.customerName $}</td>
+                                          <td>{$ item.customerPhone $}</td>
+                                          <td>{$ item.customerEmail $}</td>
+                                          <td>{$ item.customerAdress $}</td>
+                                          <td>{$ item.customerDebt $}</td>
+                                          <td>
+                                              
+                                              <button class="btn btn-primary btn-xs"  ><i class="fa fa-pencil" data-toggle="modal" data-target="#UpdateCus" ng-click="GetCusID(item)"></i></button>
+                                              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o" ng-click="DeleteCus(item.customerID)"></i></button> 
+                                          </td>
+                                          
+                                      </tr>
+                                      </a>
+                                      </tbody>
+                                      
+                                  </table>
+                                   
+                              </div><!-- /content-panel -->
+                              
+                          </div><!-- /col-md-12 -->
+
+                    </div><!-- /row -->
+
+    </section><! --/wrapper -->
+  </section><!-- /MAIN CONTENT -->
+<div class="modal fade" id="UpdateCus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Update Customer</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mt">
+              <div class="col-lg-12">
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Name: </label>
+                              <div class="col-sm-7">
+                                   <input type="text" class="form-control" ng-model="CRCus.customerName">
+
+                              </div>
+                            
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Phone:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRCus.customerPhone">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Email:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRCus.customerEmail">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Adress:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRCus.customerAdress">
+                              </div>
+                          </div>
+                      </form>
+              </div>
+          </div>                  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="UpdateCus()">Save changed</button>
+      </div>
+    </div>
+  </div>
+</div> 
+

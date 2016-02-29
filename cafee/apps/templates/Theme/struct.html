@@ -1,0 +1,148 @@
+ 
+<section id="main-content">
+          <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> Create BOM</h3>
+            
+            <!-- BASIC FORM ELELEMNTS -->
+            <div class="row mt">
+              <div class="col-lg-12">
+                  <div class="form-panel">
+                      <h4 class="mb"><i class="fa fa-angle-right"></i> BOM</h4>
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">BOM Name:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRBom.bomName">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Product Bom:</label>
+                              <div class="col-sm-7">
+                                  <select class="form-control" name="bom" ng-model='bom' ng-options="bom.productName for bom in bom_pro_list"  ng-change="productchange()"></select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Quantity:</label>
+                              <div class="col-sm-7">
+                                  <input type="number" class="form-control" ng-model="CRBom.bomQuantity">
+                              </div>
+                          </div>
+                      <div class="row mt">
+                          <div class="col-md-12">
+                              <div class="content-panel">
+                                  <table class="table table-striped table-advance table-hover">
+                                    <h4><i class="fa fa-angle-right"></i>Bom Detail</h4>
+                                    <hr>
+                                      <thead>
+                                      <tr>
+                                          <th><i class="fa fa-bullhorn"></i> STT </th>
+                                          <th class="hidden-phone"><i class="fa fa-question-circle"></i> Material</th>
+                                          <th><i class=" fa fa-edit"></i> Quantity</th>
+                                          
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                      <tr ng-repeat="item in bom_det_list track by $index">
+                                          <td>{$ $index + 1$}</a></td>
+                                          <td class="hidden-phone">{$ item.materialName $}</td>
+                                          <td>{$ item.BomDetQuantity $}</td>
+                                          <td>
+                                              <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o" ng-click="deleteitem($index)"></i></button>
+                                          </td>
+                                      </tr>
+                                      
+                                      </tbody>
+                                  </table>
+
+                              </div><!-- /content-panel -->
+                              <div class=" add-task-row">
+                                      <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddMaterial">Add New </button>
+                                      <button type="button" class="btn btn-default btn-sm pull-right" href="">Clear </button>
+                              </div>
+                          </div><!-- /col-md-12 -->
+
+                    </div><!-- /row -->
+                      
+                      </form>
+
+                  </div>
+                  <div class=" add-task-row">
+                          <button type="button" class="btn btn-info btn-sm pull-left" ng-click="CreateBom()">Save </button>
+                          <button type="button" class="btn btn-default btn-sm pull-left" href="">Clear All</button>
+                  </div>
+              </div><!-- col-lg-12-->       
+            </div><!-- /row -->          
+    </section><! --/wrapper -->
+  </section><!-- /MAIN CONTENT -->
+<div class="modal fade" id="AddMaterial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Material</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mt">
+              <div class="col-lg-12">
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Material Name:</label>
+                              <div class="col-sm-7">
+                                  <select class="form-control" ng-options="bom_det_mat.materialName for bom_det_mat in bom_mat_list" ng-model="bom_det_mat_current" name="bom_det_mat_current" ng-change="Bom_det_matchange()"></select>
+
+                              </div>
+                              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CRMaterial">Create New </button>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Quantity:</label>
+                              <div class="col-sm-7">
+                                  <input type="number" class="form-control" ng-model="CRBomDet.BomDetQuantity">
+                              </div>
+                          </div>
+                      </form>
+              </div>
+          </div>                  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="AddBomDetList(bom_det_mat_current.materialID)">Add</button>
+      </div>
+    </div>
+  </div>
+</div> 
+<div class="modal fade" id="CRMaterial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create New Material</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mt">
+              <div class="col-lg-12">
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Material Name:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRMaterial.materialName">
+                              </div>
+                              
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Price:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRMaterial.materialPrice">
+                              </div>
+                          </div>
+                      </form>
+              </div>
+          </div>                  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="CreateMaterial()">Create</button>
+      </div>
+    </div>
+  </div>
+</div> 

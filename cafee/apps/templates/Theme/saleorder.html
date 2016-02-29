@@ -1,0 +1,160 @@
+ 
+<section id="main-content">
+          <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> Sale</h3>
+            
+            <!-- BASIC FORM ELELEMNTS -->
+            <div class="row mt">
+              <div class="col-lg-12">
+                  <div class="form-panel">
+                      <h4 class="mb"><i class="fa fa-angle-right"></i> Sale Order</h4>
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Customer</label>
+                              <div class="col-sm-7">
+                                  <select class="form-control" ng-options="item.customerName for item in bill_cus_list" ng-model="bill_cus_current" name="bill_cus_current" ng-change="BillCusChange()"></select>
+                                  <div style="color: red" ><p>{$ message $}</p></div>
+                              </div>
+                              <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#AddCustomer">Create New</button>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Date:</label>
+                              <div class="col-sm-7">
+                                  <input type="date" class="form-control" ng-model="CRBill.billDate">
+                              </div>
+                          </div>
+                      <div class="row mt">
+                          <div class="col-md-12">
+                              <div class="content-panel">
+                                  <table class="table table-striped table-advance table-hover">
+                                    <h4><i class="fa fa-angle-right"></i>Detail</h4>
+                                    <hr>
+                                      <thead>
+                                      <tr>
+                                          <th><i class="fa fa-bullhorn"></i> STT </th>
+                                          <th class="hidden-phone"><i class="fa fa-question-circle"></i>Product</th>
+                                          <th><i class="fa fa-bookmark"></i> Price</th>
+                                          <th><i class=" fa fa-edit"></i> Quantity</th>
+                                          <th>Sum</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                      <tr ng-repeat="item in bill_det_list track by $index">
+                                          <td>{$ $index + 1$}</a></td>
+                                          <td class="hidden-phone">{$ item.productName $}</td>
+                                          <td>{$ item.billDetPrice $}</td>
+                                          <td>{$ item.billDetQuantity $}</td>
+                                          <td>{$ item.SumPriceBill $}</td>
+                                          <td>
+                                              <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o" ng-click="deleteitem($index)"></i></button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                        <th>Total Bill:</th>
+                                        <th>{$ TotalBill $}</th>
+                                      </tr>
+                                      </tbody>
+                                  </table>
+
+                              </div><!-- /content-panel -->
+                              <div class=" add-task-row">
+                                      <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddBillDet">Add</button>
+                                      <button type="button" class="btn btn-default btn-sm pull-right" href="">Clear </button>
+                              </div>
+                          </div><!-- /col-md-12 -->
+
+                    </div><!-- /row -->
+                      
+                      </form>
+
+                  </div>
+                  <div class=" add-task-row">
+                          <button type="button" class="btn btn-info btn-sm pull-left" ng-click="CreateBill()">Save </button>
+                          <button type="reset" class="btn btn-default btn-sm pull-left" href="">Clear All</button>
+                  </div>
+              </div><!-- col-lg-12-->       
+            </div><!-- /row -->          
+    </section><! --/wrapper -->
+  </section><!-- /MAIN CONTENT -->
+<div class="modal fade" id="AddBillDet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Product</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mt">
+              <div class="col-lg-12">
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Product Name:</label>
+                              <div class="col-sm-7">
+                                  <select class="form-control" ng-options="bill_det_pro.productName for bill_det_pro in bill_det_pro_list" ng-model="bill_det_pro_current" name="bill_det_pro_current" ng-change="BillDetProChange()"></select>
+                              </div>  
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Quantity: </label>
+                              <div class="col-sm-7">
+                                  <input type="number" class="form-control" ng-model="CRBillDet.billDetQuantity">
+                              </div>
+                          </div>
+                      </form>
+              </div>
+          </div>                  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="AddBillDet(bill_det_pro_current.productID )">Add</button>
+      </div>
+    </div>
+  </div>
+</div> 
+<div class="modal fade" id="AddCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Customer</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mt">
+              <div class="col-lg-12">
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Customer Name:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRCustomer.customerName" >
+                              </div>  
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Phone:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRCustomer.customerPhone">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Adress:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRCustomer.customerAdress">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Email:</label>
+                              <div class="col-sm-7">
+                                  <input type="email" class="form-control" ng-model="CRCustomer.customerEmail">
+                              </div>
+                          </div>
+                  
+                      </form>
+              </div>
+          </div>                  
+      </div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="CreateCustomer()">Create</button>
+      </div>
+    </div>
+  </div>
+</div> 

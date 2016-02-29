@@ -1,0 +1,137 @@
+ 
+<section id="main-content">
+          <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> Sale list </h3>
+            
+            <!-- BASIC FORM ELELEMNTS -->
+            <div class="row mt">
+              <div class="col-lg-12">
+                  <div class="form-panel">
+                      <div class=" add-task-row">
+                          <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#AddMat" >Create Customer </button>
+                          <button type="button" class="btn btn-success btn-sm pull-left" data-toggle="modal" data-target="#AddPro">Create Sale Order</button>
+                      </div>
+                      <form class="form-horizontal style-form" method="get">
+                          
+                      <div class="row mt">
+                          <div class="col-md-12">
+                              <div class="content-panel">
+                                  <table class="table table-striped table-advance table-hover">
+                                    <h4><i class="fa fa-angle-right"></i>Customer List</h4>
+                                    <hr>
+                                      <thead>
+                                      <tr>
+                                          <th>STT </th>
+                                          <th class="hidden-phone"> Name</th>
+                                          <th>Phone</th>
+                                          <th>Adress</th>
+                                          <th>Email</th>
+                                          <th>Debt</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                      <tr ng-repeat="item in customerlist track by $index">
+                                          <td>{$ $index + 1$}</a></td>
+                                          <td class="hidden-phone">{$ item.customerName $}</td>
+                                          <td> {$ item.customerPhone $}</td>
+                                          <td>{$ item.customerEmail $}</td>
+                                          <td>{$ item.customerAdress $}</td>
+                                          <td>{$ item.customerDebt $}</td>
+                                          <td>
+                                              <button class="btn btn-primary btn-xs"  ><i class="fa fa-pencil" data-toggle="modal" data-target="#EditCus" ng-click="GetCustomerID(item)"></i></button>
+                                              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o" ng-click="DeleteCustomer(item.customerID)"></i></button> 
+                                          </td>
+                                          
+                                      </tr>
+                                      </tbody>
+                                  </table>
+
+                              </div><!-- /content-panel -->
+                          </div><!-- /col-md-12 -->
+
+                    </div><!-- /row -->
+                      <div class="row mt">
+                          <div class="col-md-12">
+                              <div class="content-panel">
+                                  <table class="table table-striped table-advance table-hover">
+                                    <h4><i class="fa fa-angle-right"></i>Sale Order List</h4>
+                                    <hr>
+                                      <thead>
+                                      <tr>
+                                          <th><i class="fa fa-bullhorn"></i> STT </th>
+                                          <th class="hidden-phone"><i class="fa fa-question-circle"></i> Customer</th>
+                                          <th><i class=" fa fa-edit"></i>Order Date</th>
+                                          
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                      <tr ng-repeat="item in saleorderlist track by $index">
+                                          <td>{$ $index + 1$}</a></td>
+                                          <td class="hidden-phone">{$ item.billCus.customerName $}</td>
+                                          <td>{$ item.billDate $}</td>
+                                        
+                                      </tr>
+                                      
+                                      </tbody>
+                                  </table>
+
+                              </div><!-- /content-panel -->
+                          </div><!-- /col-md-12 -->
+
+                    </div>
+                      </form>
+
+                  </div>
+                
+              </div><!-- col-lg-12-->       
+            </div><!-- /row -->          
+    </section><! --/wrapper -->
+  </section><!-- /MAIN CONTENT -->
+<div class="modal fade" id="EditCus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Customer</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mt">
+              <div class="col-lg-12">
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Customer Name:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRCustomer.customerName" >
+                              </div>  
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Phone:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRCustomer.customerPhone">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Adress:</label>
+                              <div class="col-sm-7">
+                                  <input type="text" class="form-control" ng-model="CRCustomer.customerAdress">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" >Email:</label>
+                              <div class="col-sm-7">
+                                  <input type="email" class="form-control" ng-model="CRCustomer.customerEmail">
+                              </div>
+                          </div>
+                  
+                      </form>
+              </div>
+          </div>                  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="UpdateCustomer()">Create</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
